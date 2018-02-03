@@ -1,0 +1,28 @@
+{
+  "name": "style-pi",
+  "version": "0.0.1",
+  "description": "Create a beautify language for styling",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/danielwerthen/style-pi"
+  },
+  "keywords": [
+    "css",
+    "style",
+    "react"
+  ],
+  "author": "Daniel Lichtenstein",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.1.1",
+    "jest": "^22.1.4",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.7.0",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.7.1"
+  }
+}
