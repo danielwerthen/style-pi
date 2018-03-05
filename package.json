@@ -1,10 +1,10 @@
 {
   "name": "style-pi",
   "version": "0.0.1",
-  "description": "Create a beautify language for styling",
+  "description": "Create a beautiful language for styling",
   "main": "index.js",
   "scripts": {
-    "test": "yarn test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
