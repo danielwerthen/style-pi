@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateComponent Simple scenario should work 1`] = `"<div class=\\"ae ae\\" data-reactroot=\\"\\">Daniel</div>"`;
+exports[`CreateComponent Simple scenario should work 1`] = `"<div class=\\"ae af ag ah\\" data-reactroot=\\"\\">Daniel</div>"`;
 
-exports[`CreateComponent Simple scenario should work 2`] = `".ae{undefined:undefined}"`;
+exports[`CreateComponent Simple scenario should work 2`] = `".ae{font-size:14px}.ag{font-family:Comic Sans}.ah{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex}@media (max-width: 800px){.af{font-size:18px}}"`;

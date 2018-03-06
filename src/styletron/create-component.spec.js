@@ -9,6 +9,22 @@ describe('CreateComponent', () => {
   describe('Simple scenario', () => {
     class MyStyle extends Style {}
 
+    const breakpoints = {
+      small: '(max-width: 800px)',
+      large: '(min-width: 801px)',
+    };
+    function media(media, value) {
+      return {
+        media: breakpoints[media],
+        ...value,
+      };
+    }
+
+    Style.applyAffixes(MyStyle, {
+      small_: media,
+      large_: media,
+    });
+
     it('should work', () => {
       const Component = createComponent({
         Style: MyStyle,
@@ -20,7 +36,9 @@ describe('CreateComponent', () => {
           children: React.createElement(Component, {
             children: 'Daniel',
             fontSize: '14px',
+            smallFontSize: '18px',
             fontFamily: 'Comic Sans',
+            display: 'flex',
           }),
         }),
       );

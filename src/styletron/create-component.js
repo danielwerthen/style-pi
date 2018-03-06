@@ -1,5 +1,6 @@
 const React = require('react');
 const createReactComponent = require('../react/create-component');
+const prefixAll = require('inline-style-prefixer/static');
 const PropTypes = require('prop-types');
 
 const uppercasePattern = /[A-Z]/g;
@@ -15,7 +16,24 @@ function hyphenateStyleName(prop) {
         .replace(msPattern, '-ms-'));
 }
 
-module.exports = function createComponent(options) {
+function defaultPrepareBlock(property, value) {
+  const prefixed = prefixAll({ [property]: value });
+  return Object.keys(prefixed)
+    .map(key => {
+      const val = prefixed[key];
+      const hyphenated = hyphenateStyleName(key);
+      if (Array.isArray(val)) {
+        return val.map(item => `${hyphenated}:${item}`).join(';');
+      }
+      return `${hyphenated}:${val}`;
+    })
+    .join(';');
+}
+
+module.exports = function createComponent({
+  prepareBlock = defaultPrepareBlock,
+  ...options,
+}) {
   return Component => {
     const StyletronComponent = createReactComponent(options)(Component);
     StyletronComponent.contextTypes = {
@@ -37,7 +55,7 @@ module.exports = function createComponent(options) {
       if (cachedId !== void 0) {
         return cachedId;
       }
-      const block = `${hyphenateStyleName(property)}:${value}`;
+      const block = prepareBlock(property, value);
       return cache.addValue(key, { pseudo, block });
     };
 
