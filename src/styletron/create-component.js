@@ -30,16 +30,16 @@ function defaultPrepareBlock(property, value) {
     .join(';');
 }
 
-module.exports = function createComponent({
-  prepareBlock = defaultPrepareBlock,
-  ...options,
-}) {
+module.exports = function createComponent(options) {
+  const prepareBlock = options.prepareBlock || defaultPrepareBlock;
   return Component => {
     const StyletronComponent = createReactComponent(options)(Component);
-    StyletronComponent.contextTypes = {
-      ...StyletronComponent.contextTypes,
-      styletron: PropTypes.object,
-    };
+    StyletronComponent.contextTypes = Object.assign(
+      {
+        styletron: PropTypes.object,
+      },
+      StyletronComponent.contextTypes,
+    );
     StyletronComponent.prototype.applyStyle = function applyStyletron(
       propName,
       input,

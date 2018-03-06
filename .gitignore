@@ -56,8 +56,5 @@ typings/
 
 # dotenv environment variables file
 .env
-<<<<<<< HEAD
-
-=======
 .vscode/
->>>>>>> Initial
+es2015/
