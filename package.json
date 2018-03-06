@@ -10,13 +10,21 @@
     "type": "git",
     "url": "github.com/danielwerthen/style-pi"
   },
-  "keywords": ["css", "style", "react"],
+  "keywords": [
+    "css",
+    "style",
+    "react"
+  ],
   "author": "Daniel Lichtenstein",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^22.1.4"
+    "jest": "^22.1.4",
+    "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
     "meta-prototype": "^1.0.2"
+  },
+  "optionalDependencies": {
+    "react": "^16.2.0"
   }
 }

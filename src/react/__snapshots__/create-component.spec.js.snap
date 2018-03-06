@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateComponent Simple scenario should work 1`] = `
+<div
+  className="fontSize: 14px fontFamily: Comic Sans"
+>
+  Daniel
+</div>
+`;
