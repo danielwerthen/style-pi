@@ -19,12 +19,14 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^22.1.4",
+    "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
     "meta-prototype": "^1.0.2"
   },
   "optionalDependencies": {
-    "react": "^16.2.0"
+    "react": "^16.2.0",
+    "styletron-engine-atomic": "^1.0.0"
   }
 }

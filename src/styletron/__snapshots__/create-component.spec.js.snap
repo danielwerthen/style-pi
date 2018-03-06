@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateComponent Simple scenario should work 1`] = `"<div class=\\"ae ae\\" data-reactroot=\\"\\">Daniel</div>"`;
+
+exports[`CreateComponent Simple scenario should work 2`] = `".ae{undefined:undefined}"`;
