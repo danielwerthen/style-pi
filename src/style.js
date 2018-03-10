@@ -44,8 +44,7 @@ module.exports = class Style extends MetaObject {
         }
         const modifier = map[modKey];
         return function method(value) {
-          const innerValue = this[innerName](value);
-          return modifier(affix, innerValue);
+          return this[innerName](modifier(affix, value));
         };
       }
       return undefined;

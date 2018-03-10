@@ -7,9 +7,12 @@ module.exports = function createComponent(options) {
 
   return Component =>
     class StyledComponent extends React.PureComponent {
-      constructor(props) {
-        super(props);
-        this.style = new Style();
+      constructor(props, context) {
+        super(props, context);
+        this.style = this.initStyle(props, context);
+      }
+      initStyle(props, context) {
+        return new Style();
       }
       applyStyle(propName, value) {
         return this.style[propName](value);

@@ -16,7 +16,7 @@ describe('CreateComponent', () => {
     function media(media, value) {
       return {
         media: breakpoints[media],
-        ...value,
+        value,
       };
     }
 

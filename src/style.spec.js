@@ -4,11 +4,26 @@ describe('Style', () => {
   describe('Basic class', () => {
     class MyStyle extends Style {
       methodMissing(name) {
-        return value => ({ [name]: value });
+        return input => {
+          if (typeof input !== 'object') {
+            return { [name]: input };
+          }
+          const { value, ...rest } = input;
+          return {
+            [name]: value,
+            ...rest,
+          };
+        };
       }
     }
 
     function media(media, value) {
+      if (typeof value !== 'object') {
+        return {
+          media,
+          value,
+        };
+      }
       return {
         media,
         ...value,
@@ -16,6 +31,12 @@ describe('Style', () => {
     }
 
     function size(size, value) {
+      if (typeof value !== 'object') {
+        return {
+          size,
+          value,
+        };
+      }
       return {
         size,
         ...value,
