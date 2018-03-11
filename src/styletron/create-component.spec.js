@@ -7,7 +7,14 @@ const Styletron = require('styletron-engine-atomic').Server;
 
 describe('CreateComponent', () => {
   describe('Simple scenario', () => {
-    class MyStyle extends Style {}
+    class MyStyle extends Style {
+      defaultStyle(style) {
+        return super.defaultStyle({
+          ...style,
+          border: '1px solid black',
+        });
+      }
+    }
 
     const breakpoints = {
       small: '(max-width: 800px)',

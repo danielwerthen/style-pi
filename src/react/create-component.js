@@ -32,6 +32,9 @@ module.exports = function createComponent(options) {
       }
       mapProps(props) {
         const output = {};
+        if (Reflect.has(this.style, 'defaultStyle')) {
+          this.mergeProp(output, 'className', this.style.defaultStyle({}));
+        }
         for (var key in props) {
           if (stylePredicator[key]()) {
             const className = this.applyStyle(key, props[key]);

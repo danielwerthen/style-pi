@@ -22,6 +22,14 @@ function defaultGetAffixPredicate(str) {
 }
 
 module.exports = class Style extends MetaObject {
+  spread(style) {
+    return Object.keys(style)
+      .map(key => this[key](style[key]))
+      .join(' ');
+  }
+  defaultStyle(style) {
+    return this.spread(style);
+  }
   static wrapMethodMissing(to, fn) {
     const inner = to.prototype.methodMissing;
     to.prototype.methodMissing = function methodMissing(...args) {
