@@ -1,5 +1,6 @@
 const BaseStyle = require('../style');
 const prefixAll = require('inline-style-prefixer/static');
+const { modifiers, styletronStore } = require('./constants');
 
 const uppercasePattern = /[A-Z]/g;
 const msPattern = /^ms-/;
@@ -42,12 +43,15 @@ function injectStyle(styletron, style) {
   return cache.addValue(key, { pseudo, block });
 }
 
-const STYLETRON_STORE = Symbol('Styletron store');
-
 module.exports = class StyletronStyle extends BaseStyle {
   constructor(styletron) {
     super();
-    this[STYLETRON_STORE] = styletron;
+    this[styletronStore] = styletron;
+    this[modifiers] = [];
+  }
+
+  addModifier(name, value) {
+    this[modifiers].push({ [name]: value });
   }
 
   defaultStyle(arg) {
@@ -56,21 +60,11 @@ module.exports = class StyletronStyle extends BaseStyle {
 
   methodMissing(property) {
     return function(value) {
-      const styletron = this[STYLETRON_STORE];
-      if (typeof value !== 'object') {
-        return injectStyle(styletron, {
-          property,
-          value,
-        });
-      }
+      const styletron = this[styletronStore];
+      this[modifiers].push({ property, value });
       return injectStyle(
         styletron,
-        Object.assign(
-          {
-            property,
-          },
-          value,
-        ),
+        Object.assign.apply(null, this[modifiers].splice(0)),
       );
     };
   }

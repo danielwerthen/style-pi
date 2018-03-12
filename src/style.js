@@ -44,6 +44,9 @@ module.exports = class Style extends MetaObject {
     const keys = Object.keys(map);
     const predicates = keys.map(key => [key, getAffixPredicate(key)]);
     Style.wrapMethodMissing(to, function appliedAffixes(methodName) {
+      if (typeof methodName === 'symbol') {
+        return undefined;
+      }
       for (var i = 0; i < predicates.length; i++) {
         const [modKey, [affix, predicate]] = predicates[i];
         const innerName = predicate(affix, methodName);
@@ -52,7 +55,7 @@ module.exports = class Style extends MetaObject {
         }
         const modifier = map[modKey];
         return function method(value) {
-          return this[innerName](modifier(affix, value));
+          return this[innerName](modifier.call(this, affix, value));
         };
       }
       return undefined;

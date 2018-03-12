@@ -1,10 +1,11 @@
 const Style = require('../style');
+const { MetaObject } = require('meta-prototype');
 
 function isStyle() {
   return true;
 }
 
-class StylePredicator extends Style {
+class StylePredicator extends MetaObject {
   className() {
     return false;
   }

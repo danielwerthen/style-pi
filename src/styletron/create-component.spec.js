@@ -21,10 +21,8 @@ describe('CreateComponent', () => {
       large: '(min-width: 801px)',
     };
     function media(media, value) {
-      return {
-        media: breakpoints[media],
-        value,
-      };
+      this.addModifier('media', breakpoints[media]);
+      return value;
     }
 
     Style.applyAffixes(MyStyle, {
@@ -44,6 +42,7 @@ describe('CreateComponent', () => {
             children: 'Daniel',
             fontSize: '14px',
             smallFontSize: '18px',
+            smallLargeFontSize: '21px',
             fontFamily: 'Comic Sans',
             display: 'flex',
           }),
