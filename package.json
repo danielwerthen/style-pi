@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir es2015 --ignore *.spec.js --presets=es2015"
+    "build":
+      "rimraf es2015 && babel src --out-dir es2015 --ignore *.spec.js --presets=es2015"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
-    "meta-prototype": "^1.1.0"
+    "meta-prototype": "^2.0.0"
   },
   "optionalDependencies": {
     "inline-style-prefixer": "^4.0.0",

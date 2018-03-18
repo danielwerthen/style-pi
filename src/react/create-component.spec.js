@@ -1,31 +1,35 @@
 const React = require('react');
-const ShallowRenderer = require('react-test-renderer/shallow');
+const ReactDOMServer = require('react-dom/server');
 const createComponent = require('./create-component');
 const Style = require('../style');
+const StyletronAdapter = require('../adapters/styletron-adapter');
+const Provider = require('./provider');
+const Styletron = require('styletron-engine-atomic').Server;
 
-describe('CreateComponent', () => {
-  describe('Simple scenario', () => {
-    class MyStyle extends Style {
-      methodMissing(name) {
-        return value => `${name}: ${value}`;
-      }
-    }
+describe('create component', () => {
+  const styletron = new Styletron();
+  const adapter = new StyletronAdapter(styletron);
 
-    it('should work', () => {
-      const renderer = new ShallowRenderer();
-      const Component = createComponent({
-        Style: MyStyle,
-      })('div');
-      renderer.render(
-        React.createElement(Component, {
-          children: 'Daniel',
-          fontSize: '14px',
-          fontFamily: 'Comic Sans',
-        }),
-      );
-      const result = renderer.getRenderOutput();
+  class CustomStyle extends Style {}
 
-      expect(result).toMatchSnapshot();
-    });
+  const MyComponent = createComponent({ Style: CustomStyle })('div');
+  const result = ReactDOMServer.renderToString(
+    React.createElement(Provider, {
+      value: adapter,
+      children: React.createElement(MyComponent, {
+        fontSize: '12px',
+        className: 'not-styletron',
+        onClick: function() {},
+        children: 'This is an element',
+      }),
+    }),
+  );
+
+  it('should render ok', () => {
+    expect(result).toMatchSnapshot();
+  });
+
+  it('should produce valid css', () => {
+    expect(styletron.getCss()).toMatchSnapshot();
   });
 });

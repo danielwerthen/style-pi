@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Style instance of level1 should use the media prefixes and pseudo suffixes 1`] = `"ae"`;
+
+exports[`Style instance of level1 should use the media prefixes and pseudo suffixes 2`] = `"@media (max-width: 768px){.ae:hover{font-size:13px}}"`;
+
+exports[`Style instance of level2 should correctly apply foobar spread style 1`] = `"ae af ag"`;
+
+exports[`Style instance of level2 should correctly apply foobar spread style 2`] = `".ae{font-size:12px}.ag{margin:21px}@media (max-width: 768px){.af{font-size:18px}}"`;
+
+exports[`Style instance of level2 should correctly apply foobar spread style with hover suffix 1`] = `"ae af ag"`;
+
+exports[`Style instance of level2 should correctly apply foobar spread style with hover suffix 2`] = `".ae:hover{font-size:12px}@media (max-width: 768px){.af:hover{font-size:18px}.ag:hover{margin:21px}}"`;

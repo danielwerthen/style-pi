@@ -1,4 +1,6 @@
+'use strict';
+
 module.exports = {
   modifiers: Symbol('Modifier key'),
-  styletronStore: Symbol('Styletron store'),
+  adapter: Symbol('Style adapter')
 };

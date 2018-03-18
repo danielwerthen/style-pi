@@ -1,64 +1,50 @@
 const { MetaObject } = require('meta-prototype');
+const { modifiers, adapter } = require('./constants');
 
-function prefixPredicate(prefix, str) {
-  if (str.startsWith(prefix)) {
-    const rest = str.substr(prefix.length);
-    return rest.substr(0, 1).toLowerCase() + rest.substr(1);
-  }
-}
-function suffixPredicate(suffix, str) {
-  if (str.endsWith(suffix.substr(0, 1).toUpperCase() + suffix.substr(1))) {
-    return str.substr(0, str.length - suffix.length);
-  }
+function Style(styleAdapter) {
+  MetaObject.call(this);
+  this[adapter] = styleAdapter;
+  this[modifiers] = [];
 }
 
-function defaultGetAffixPredicate(str) {
-  if (str.endsWith('_')) {
-    return [str.substr(0, str.length - 1), prefixPredicate];
-  } else if (str.startsWith('_')) {
-    return [str.substr(1, 1).toLowerCase() + str.substr(2), suffixPredicate];
-  }
-  throw new Error('Unknown affix predicate string');
-}
+Style.prototype = Object.create(MetaObject.prototype, {
+  addModifier: {
+    value: function addModifier(name, value) {
+      this[modifiers].push({ [name]: value });
+    },
+  },
 
-module.exports = class Style extends MetaObject {
-  spread(style) {
-    return Object.keys(style)
-      .map(key => this[key](style[key]))
-      .join(' ');
-  }
-  defaultStyle(style) {
-    return this.spread(style);
-  }
-  static wrapMethodMissing(to, fn) {
-    const inner = to.prototype.methodMissing;
-    to.prototype.methodMissing = function methodMissing(...args) {
-      const result = fn(...args);
-      if (result === undefined) {
-        return inner(...args);
-      }
-      return result;
-    };
-  }
-  static applyAffixes(to, map, getAffixPredicate = defaultGetAffixPredicate) {
-    const keys = Object.keys(map);
-    const predicates = keys.map(key => [key, getAffixPredicate(key)]);
-    Style.wrapMethodMissing(to, function appliedAffixes(methodName) {
-      if (typeof methodName === 'symbol') {
-        return undefined;
-      }
-      for (var i = 0; i < predicates.length; i++) {
-        const [modKey, [affix, predicate]] = predicates[i];
-        const innerName = predicate(affix, methodName);
-        if (!innerName) {
-          continue;
-        }
-        const modifier = map[modKey];
-        return function method(value) {
-          return this[innerName](modifier.call(this, affix, value));
-        };
-      }
-      return undefined;
-    });
-  }
-};
+  spread: {
+    value: function spread(style) {
+      const mods = this[modifiers].slice(0);
+      return Object.keys(style)
+        .map(key => {
+          this[modifiers] = mods.slice(0);
+          return this[key](style[key]);
+        })
+        .join(' ');
+    },
+  },
+
+  defaultStyle: {
+    value: function defaultStyle(style) {
+      return this.spread(style);
+    },
+  },
+
+  methodMissing: {
+    value: function methodMissing(property) {
+      return function(value) {
+        const styleAdapter = this[adapter];
+        this[modifiers].push({ property, value });
+        return styleAdapter.injectStyle(
+          Object.assign.apply(null, this[modifiers].splice(0)),
+        );
+      };
+    },
+  },
+});
+
+Style.prototype.constructor = Style;
+
+module.exports = Style;

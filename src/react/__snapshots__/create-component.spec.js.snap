@@ -1,9 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateComponent Simple scenario should work 1`] = `
-<div
-  className="fontSize: 14px fontFamily: Comic Sans"
->
-  Daniel
-</div>
-`;
+exports[`create component should produce valid css 1`] = `".ae{font-size:12px}"`;
+
+exports[`create component should render ok 1`] = `"<div class=\\"ae not-styletron\\" data-reactroot=\\"\\">This is an element</div>"`;

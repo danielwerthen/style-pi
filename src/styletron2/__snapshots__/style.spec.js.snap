@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Style instance of level1 should use the media prefixes and pseudo suffixes 1`] = `"ae"`;
-
-exports[`Style instance of level1 should use the media prefixes and pseudo suffixes 2`] = `"@media (max-width: 768px){.ae{font-size-hover:13px}}"`;
-
-exports[`Style instance of level2 should use the base level defaultStyle 1`] = `"ae"`;
-
-exports[`Style instance of level2 should use the base level defaultStyle 2`] = `".ae{font-size:12px}"`;
