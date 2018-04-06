@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`create component should produce valid css 1`] = `".ae{font-size:12px}"`;
-
-exports[`create component should render ok 1`] = `"<div class=\\"ae not-styletron\\" data-reactroot=\\"\\">This is an element</div>"`;
