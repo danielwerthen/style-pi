@@ -5,28 +5,38 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build":
-      "rimraf es2015 && babel src --out-dir es2015 --ignore *.spec.js --presets=es2015"
+    "build": "rimraf es2015 && babel src --out-dir es2015 --ignore *.spec.js --presets=es2015"
   },
   "repository": {
     "type": "git",
     "url": "github.com/danielwerthen/style-pi"
   },
-  "keywords": ["css", "style", "react"],
+  "keywords": [
+    "css",
+    "style",
+    "react"
+  ],
   "author": "Daniel Lichtenstein",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
     "babel-preset-es2015": "^6.24.1",
     "jest": "^22.1.4",
     "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "styletron-utils": "^3.0.4"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "optionalDependencies": {
     "inline-style-prefixer": "^4.0.0",
     "react": "^16.2.0",
     "styletron-engine-atomic": "^1.0.0"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-es2015"
+    ]
   }
 }
