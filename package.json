@@ -23,7 +23,6 @@
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
-    "meta-prototype": "^2.0.0"
   },
   "optionalDependencies": {
     "inline-style-prefixer": "^4.0.0",
