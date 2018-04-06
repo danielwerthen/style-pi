@@ -2972,12 +2972,22 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
+styletron-core@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/styletron-core/-/styletron-core-3.0.4.tgz#648081572a8de30acbe3008cd283c421565444bb"
+
 styletron-engine-atomic@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/styletron-engine-atomic/-/styletron-engine-atomic-1.0.0.tgz#b8390fc6345d5864902cc2524da0749e559651b5"
   dependencies:
     inline-style-prefixer "^4.0.0"
     styletron-standard "^1.0.0"
+
+styletron-server@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/styletron-server/-/styletron-server-3.0.4.tgz#6bf24643b2ce84198d0fcb7c27308f00880c8dfd"
+  dependencies:
+    styletron-core "^3.0.4"
 
 styletron-standard@^1.0.0:
   version "1.0.0"

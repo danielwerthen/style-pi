@@ -1,6 +1,5 @@
 export const prefixes = Symbol('PREFIX_STORE');
 export const suffixes = Symbol('SUFFIX_STORE');
-export const stack = Symbol('STACK_STORE');
 
 export function getPrefixes(transformer) {
   return transformer[prefixes];
@@ -10,18 +9,33 @@ export function getSuffixes(transformer) {
   return transformer[suffixes];
 }
 
-export function addToStack(transformer, item) {
-  return transformer[stack].push(item);
+export function setPrefixes(Class, value) {
+  Reflect.defineProperty(Class.prototype, prefixes, {
+    value,
+    writable: true,
+    enumerable: false,
+  });
 }
 
-export function getStack(transformer) {
-  return transformer[stack];
+export function setSuffixes(Class, value) {
+  Reflect.defineProperty(Class.prototype, suffixes, {
+    value,
+    writable: true,
+    enumerable: false,
+  });
 }
 
-export default class Transformer {
-  constructor(options = {}) {
-    this[prefixes] = options.prefixes || [];
-    this[suffixes] = options.suffixes || [];
-    this[stack] = [];
-  }
+export function definePrefix(Class, name) {
+  const store = Class.prototype[prefixes];
+  store.push(name);
 }
+
+export function defineSuffix(Class, name) {
+  const store = Class.prototype[suffixes];
+  store.push(name);
+}
+
+export default class Transformer {}
+
+setPrefixes(Transformer, []);
+setSuffixes(Transformer, []);

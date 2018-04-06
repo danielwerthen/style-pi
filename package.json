@@ -26,6 +26,7 @@
     "jest": "^22.1.4",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "styletron-server": "^3.0.4",
     "styletron-utils": "^3.0.4"
   },
   "dependencies": {},

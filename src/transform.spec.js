@@ -1,5 +1,5 @@
 import transform from './transform';
-import BaseTransformer from './transformer';
+import BaseTransformer, { definePrefix } from './transformer';
 
 class Transformer extends BaseTransformer {
   foobar(value) {
@@ -22,11 +22,11 @@ class Transformer extends BaseTransformer {
   }
 }
 
+definePrefix(Transformer, 'small');
+
 describe('Transformer', () => {
   it('should transform simple', () => {
-    const transformer = new Transformer({
-      prefixes: ['small', 'large'],
-    });
+    const transformer = new Transformer();
     expect(
       transform(transformer, {
         smallColor: 'red',
